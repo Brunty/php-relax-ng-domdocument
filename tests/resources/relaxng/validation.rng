@@ -1,0 +1,45 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0">
+    <start>
+        <element name="member">
+            <interleave>
+                <ref name="name" />
+                <ref name="dob" />
+                <zeroOrMore>
+                    <ref name="anyElement"/>
+                </zeroOrMore>
+            </interleave>
+        </element>
+    </start>
+
+    <define name="name">
+        <element name="name">
+            <text/>
+        </element>
+    </define>
+
+    <define name="dob">
+        <element name="dob">
+            <text/>
+        </element>
+    </define>
+
+    <define name="anyElement">
+        <element>
+            <anyName>
+                <except>
+                    <name>name</name>
+                    <name>dob</name>
+                </except>
+            </anyName>
+            <zeroOrMore>
+                <choice>
+                    <attribute>
+                        <anyName/>
+                    </attribute>
+                    <text/>
+                    <ref name="anyElement"/>
+                </choice>
+            </zeroOrMore>
+        </element>
+    </define>
+</grammar>

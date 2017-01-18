@@ -1,0 +1,22 @@
+{
+    "name": "brunty/relax-ng-domdocument",
+    "description": "Adds a convenience feature to DOMDocument::relaxNGValidate and  DOMDocument::relaxNGValidateSource to disable PHP Warnings",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Brunt",
+            "email": "matt@mfyu.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Brunty\\": "src/"
+        }
+    },
+    "require": {
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    }
+}

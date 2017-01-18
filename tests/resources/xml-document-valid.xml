@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<member>
+    <title>Mr</title>
+    <name>John Smith</name>
+    <dob>2017-01-01</dob>
+    <address>
+        <number>12</number>
+    </address>
+</member>
