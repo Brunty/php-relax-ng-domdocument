@@ -6,14 +6,16 @@ class DOMDocument extends \DOMDocument
 {
 
     /**
+     * @var array
+     */
+    private $validationWarnings = [];
+
+    /**
      * {@inheritdoc}
      */
     public function relaxNGValidate($filename)
     {
-        set_error_handler(
-            function ($errNumber, $errString) {
-            }
-        );
+        $this->setErrorHandler();
         $result = parent::relaxNGValidate($filename);
         restore_error_handler();
 
@@ -25,13 +27,27 @@ class DOMDocument extends \DOMDocument
      */
     public function relaxNGValidateSource($string)
     {
-        set_error_handler(
-            function ($errNumber, $errString) {
-            }
-        );
+        $this->setErrorHandler();
         $result = parent::relaxNGValidateSource($string);
         restore_error_handler();
 
         return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public function getValidationWarnings()
+    {
+        return $this->validationWarnings;
+    }
+
+    private function setErrorHandler()
+    {
+        set_error_handler(
+            function ($errNumber, $errString) {
+                $this->validationWarnings[] = $errString;
+            }
+        );
     }
 }
