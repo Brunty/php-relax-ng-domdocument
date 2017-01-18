@@ -2,6 +2,14 @@
     "name": "brunty/relax-ng-domdocument",
     "description": "Adds a convenience feature to DOMDocument::relaxNGValidate and  DOMDocument::relaxNGValidateSource to disable PHP Warnings",
     "type": "library",
+    "keywords": [
+        "DOMDocument",
+        "RELAX NG",
+        "RELAXNG",
+        "XML",
+        "Schema",
+        "Validation"
+    ],
     "license": "MIT",
     "authors": [
         {
