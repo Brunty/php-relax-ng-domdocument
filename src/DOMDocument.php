@@ -44,6 +44,7 @@ class DOMDocument extends \DOMDocument
 
     private function setErrorHandler()
     {
+        $this->validationWarnings = [];
         set_error_handler(
             function ($errNumber, $errString) {
                 $this->validationWarnings[] = $errString;

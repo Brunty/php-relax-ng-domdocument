@@ -68,7 +68,6 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
     public function it_replaces_the_error_handler_when_invalid_xml_is_supplied_for_validation_from_source()
     {
         $document = $this->getDomDocument();
-
         $standardDocument = $this->getStandardDomDocument();
 
         $this->setHandler();
@@ -84,7 +83,6 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
             $output
         );
     }
-
 
     /** @test */
     public function it_captures_the_validation_warnings_when_invalid_xml_is_supplied_for_validation()
@@ -117,6 +115,45 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
             'DOMDocument::relaxNGValidateSource(): Expecting an element dob, got nothing',
             'DOMDocument::relaxNGValidateSource(): Invalid sequence in interleave',
             'DOMDocument::relaxNGValidateSource(): Element member failed to validate content'
+        ];
+
+        self::assertEquals($expectedWarnings, $document->getValidationWarnings());
+    }
+
+    /** @test */
+    public function it_resets_the_validation_warnings_when_invalid_xml_is_supplied_for_validation_from_source_twice()
+    {
+        $document = $this->getDomDocument();
+
+        $this->setHandler();
+
+        $document->relaxNGValidateSource(file_get_contents(__DIR__ . '/resources/relaxng/validation.rng'));
+        $document->relaxNGValidateSource(file_get_contents(__DIR__ . '/resources/relaxng/validation.rng'));
+
+        $expectedWarnings = [
+            'DOMDocument::relaxNGValidateSource(): Expecting an element dob, got nothing',
+            'DOMDocument::relaxNGValidateSource(): Invalid sequence in interleave',
+            'DOMDocument::relaxNGValidateSource(): Element member failed to validate content'
+        ];
+
+        self::assertEquals($expectedWarnings, $document->getValidationWarnings());
+    }
+
+
+    /** @test */
+    public function it_resets_the_validation_warnings_when_invalid_xml_is_supplied_for_validation_twice()
+    {
+        $document = $this->getDomDocument();
+
+        $this->setHandler();
+
+        $document->relaxNGValidate(__DIR__ . '/resources/relaxng/validation.rng');
+        $document->relaxNGValidate(__DIR__ . '/resources/relaxng/validation.rng');
+
+        $expectedWarnings = [
+            'DOMDocument::relaxNGValidate(): Expecting an element dob, got nothing',
+            'DOMDocument::relaxNGValidate(): Invalid sequence in interleave',
+            'DOMDocument::relaxNGValidate(): Element member failed to validate content'
         ];
 
         self::assertEquals($expectedWarnings, $document->getValidationWarnings());
