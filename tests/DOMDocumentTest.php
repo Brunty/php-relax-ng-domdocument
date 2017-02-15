@@ -48,7 +48,7 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
     {
         $document = $this->getDomDocument();
 
-        $standardDocument = $this->getStandardDomDocument();
+        $standardDocument = $this->getDomDocument();
 
         $this->setHandler();
 
@@ -68,7 +68,7 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
     public function it_replaces_the_error_handler_when_invalid_xml_is_supplied_for_validation_from_source()
     {
         $document = $this->getDomDocument();
-        $standardDocument = $this->getStandardDomDocument();
+        $standardDocument = $this->getDomDocument();
 
         $this->setHandler();
 
@@ -177,16 +177,5 @@ class DOMDocumentTest extends \PHPUnit_Framework_TestCase
         $document->load(__DIR__ . '/resources/xml-document-invalid.xml');
 
         return $document;
-    }
-
-    /**
-     * @return \DOMDocument
-     */
-    private function getStandardDomDocument()
-    {
-        $standardDocument = new \DOMDocument;
-        $standardDocument->load(__DIR__ . '/resources/xml-document-invalid.xml');
-
-        return $standardDocument;
     }
 }
